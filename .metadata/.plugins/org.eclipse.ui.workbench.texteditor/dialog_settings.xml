@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item value="652" key="DIALOG_X_ORIGIN"/>
+		<item value="362" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="unsorted" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="true" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="sortedlist"/>
+			<item value="or"/>
+			<item value="o"/>
+			<item value="theImage"/>
+			<item value="RED"/>
+			<item value="rightCannon"/>
+			<item value="leftCannon"/>
+			<item value="cockpit"/>
+			<item value="values"/>
+			<item value="2"/>
+			<item value="4"/>
+			<item value="car"/>
+			<item value="passengers"/>
+			<item value="buss"/>
+			<item value="str"/>
+		</list>
+		<list key="replacehistory">
+			<item value="unsorted"/>
+			<item value="dice"/>
+			<item value="WHITE"/>
+			<item value="ball2"/>
+			<item value="ball1"/>
+			<item value="arr"/>
+			<item value="2"/>
+			<item value="Lorry"/>
+			<item value="vehicles"/>
+			<item value="Vehicle"/>
+			<item value="Buss"/>
+			<item value="Bicycle"/>
+			<item value="f5"/>
+			<item value="f6"/>
+			<item value="denominator"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="336" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="454" key="DIALOG_HEIGHT"/>
+		<item value="1135" key="DIALOG_X_ORIGIN"/>
+		<item value="251" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

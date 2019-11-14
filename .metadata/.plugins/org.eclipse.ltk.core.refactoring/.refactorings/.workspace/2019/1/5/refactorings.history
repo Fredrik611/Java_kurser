@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;1DV507/src/fa222rw_assign1/ferrySystem/FerryMain.java&apos;" deleteContents="false" description="Delete resource &apos;1DV507/src/fa222rw_assign1/ferrySystem/FerryMain.java&apos;" element1="/1DV507/src/fa222rw_assign1/ferrySystem/FerryMain.java" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1548689090903"/>
+</session>

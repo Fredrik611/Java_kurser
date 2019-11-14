@@ -1,0 +1,34 @@
+/**
+ * 
+ */
+package fa222rw_assign3;
+
+import javafx.application.Application;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+
+/**
+ * @author Fredrik
+ *
+ */
+public class TinyPainter extends Application{
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		GridPane grid = new GridPane();
+		ComboBox<String> type = new ComboBox<>();
+		ComboBox<Integer> size = new ComboBox<>();
+		ComboBox<Color> pick = new ComboBox<>();
+		
+	}
+	
+
+}

@@ -1,0 +1,40 @@
+/**
+ * 
+ */
+package fa222rw_assign3;
+
+import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
+/**
+ * @author Fredrik
+ *
+ */
+public class TinyPainter extends Application{
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		GridPane grid = new GridPane();
+		ComboBox<String> type = new ComboBox<>();
+		ComboBox<Integer> size = new ComboBox<>();
+		final ColorPicker colorPicker = new ColorPicker();
+		grid.add(type, 0, 0);
+		grid.add(type, 0, 1);
+		grid.add(colorPicker, 0,2);
+	}
+	
+
+}

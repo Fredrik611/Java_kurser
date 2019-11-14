@@ -1,0 +1,30 @@
+package fa222rw_assign3;
+
+import java.util.Scanner;
+
+public class EuclideanMain {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		System.out.print("Enter divider 1: ");
+		int m = in.nextInt();
+		System.out.print("Enter divider 2: ");
+		int n = in.nextInt();
+		
+		GCD(m,n);
+	}
+	private static int GCD(int m, int n) {
+		int commonDivider = 0;
+		if (m>n) 
+			commonDivider = n;
+		else 
+			commonDivider = m;
+		if (m != 0 && n != 0) {
+			while(m % commonDivider != 0 && n % commonDivider != 0) {
+				commonDivider--;
+			}
+		return commonDivider;
+		}
+		else
+			throw new IllegalArgumentException("One of the arguments is 0");
+	}
+}

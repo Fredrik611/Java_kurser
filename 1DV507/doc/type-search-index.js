@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"fa222rw_assign2.queue","l":"LinkedQueue"},{"p":"fa222rw_assign2.queue","l":"Queue"}]

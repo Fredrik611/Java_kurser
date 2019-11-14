@@ -1,0 +1,158 @@
+package fa222rw_assign2.ArrayQueue;
+
+import java.util.Iterator;
+
+
+public class ArrayQueue implements Queue {
+	private int size = 0;
+	private Object[] arr = new Object[8];
+	private int head = 0;
+	private int tail = 0;
+	
+	// returns the size of the array 
+	@Override
+	public int size() {return size;}
+
+	// returns if the array is empty
+	@Override
+	public boolean isEmpty() {return size == 0;}
+
+	// adds an object to the array 
+	@Override
+	public void enqueue(Object element) {
+		size++;
+		// if the size is large enough 
+		if (size+1 >= arr.length) {
+			resize();
+		}
+		
+		if (tail >= head ) {
+			arr[tail++] = element; 
+		}
+		
+		else {
+			// if the array has wrapped around it should move the head part of the array forward one step
+			movehead();
+			arr[++tail] = element;
+		}
+	}
+	
+	private void resize() {
+		// resizes the array
+		int cnt = 0;
+		Object[] tmp = new Object[2*arr.length];
+		// if the order is right then it copies the array to the larger one 
+		if (head == 0) {
+			
+			System.arraycopy(arr,0,tmp,0,arr.length); 
+		}
+		
+		// otherwise it should reorder it self in the new array. so head is head and tail is tail 
+		else {
+			for (int i = head; i < size-1; i++) {
+				tmp[cnt++] = arr[i];
+			}
+			for (int i = 0; i <= tail ;i++) {
+				tmp[cnt++] = arr[i];
+			}
+			head = 0;
+			tail = size-1;
+		}
+		arr = tmp;
+	}
+	// move head part of array one step forward 
+	private void movehead() {
+		// so it goes from tail part in the array and goes bakwards and moving the values one by one forward.
+		for (int i = size-1; i >= head; i--) {
+			arr[i+1] = arr[i];
+		}
+		head++;
+	}
+	// does the same as movehead but from tail towards the end of the array.  
+	private void movetail() {
+		for (int i = tail; i >= 0; i--) {
+			arr[i+1] = arr[i]; 
+			
+		}
+		tail++;
+	}
+	
+	// removes an object in the array 
+	@Override
+	public Object dequeue() throws IndexOutOfBoundsException {
+		// if there isn't any thing in the array it should throw an IndexOutOfBoundsException
+		if (size >= 0) {
+		Object tmp = arr[head];
+		// if the head is not last in the array. run this code 
+		if (head != size-1) {
+			head++;
+			
+			// if the tail is not last in the array move the tail.
+			if (tail != size)
+				movetail();
+			// else just move the tail to the front of the array. 
+			else	 
+			tail = 0;
+			arr[0] = arr[--size];
+		}
+		// if the head is last in the array 
+		else {
+			// the head becomes 0
+			head = 0;
+			// and tail moves one forward and size becomes one less 
+			tail++;
+			size--;
+		}
+			
+		return tmp;
+		}
+		else
+			throw new IndexOutOfBoundsException();
+	}
+	// returns the head in the array. If not the array is empty. 
+	@Override
+	public Object first() throws IndexOutOfBoundsException{
+		if (size > 0) 
+		return arr[head];
+		else
+			throw new IndexOutOfBoundsException();
+	}
+	// returns the tail in the array 
+	@Override
+	public Object last() {		
+		if (size >= 0) 
+			return arr[tail-1];
+		else
+			throw new IndexOutOfBoundsException();}
+
+	// returns a string with the object in the array 
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		for (int i = head; i < size-1; i++) {
+			str.append(arr[i] + ", ");
+		}
+		for (int i = 0; i <= tail ;i++) {
+			str.append(arr[i] + ", ");
+		}
+		return str.toString();
+	}
+
+	// iterates the array object 
+	@Override
+	public Iterator<Object> iterator(){return new arrIterator();}
+	private class arrIterator implements Iterator<Object> {
+		private int count = head;
+		public Object next() {
+			if (count == size) {
+				count = tail;
+			}
+			return arr[count++];
+		}
+		
+		public boolean hasNext() {return count != tail+1;}
+		
+		public void remove() {
+			throw new RuntimeException("remove() is not implemented");
+		}
+	}
+}

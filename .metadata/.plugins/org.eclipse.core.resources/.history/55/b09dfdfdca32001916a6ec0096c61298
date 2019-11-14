@@ -1,0 +1,20 @@
+package fa222rw_assign2.ArrayQueue;
+
+import java.util.Iterator;
+
+public class Iteratortest {
+	public static void main(String[] args) {
+		ArrayQueue arr = new ArrayQueue();
+		
+		for (int i = 0; i < 10; i++) {
+			arr.enqueue(i);
+		}
+
+		Iterator<Object> iterator = arr.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
+			
+		}
+		
+	}
+}

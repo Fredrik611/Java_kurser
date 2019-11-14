@@ -1,0 +1,14 @@
+package fa222rw_assign3;
+
+public class EuclideanMain {
+	public static void main(String[] args) {
+		
+	}
+	private static int GCD(int m, int n) {
+		int CommonDivider = 0;
+		while () {
+			
+		}
+		return -1;
+	}
+}

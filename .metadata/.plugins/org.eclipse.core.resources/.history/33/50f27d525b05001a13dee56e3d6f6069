@@ -1,0 +1,97 @@
+/*
+ * File:	Process.java
+ * Course: 	Operating Systems
+ * Code: 	1DV512
+ * Author: 	Suejb Memeti
+ * Date: 	November, 2018
+ */
+
+import java.util.ArrayList;
+
+public class FCFS{
+	private int completedT = 0;
+	// The list of processes to be scheduled
+	public ArrayList<Process> processes;
+
+	// Class constructor
+	public FCFS(ArrayList<Process> processes) {
+		this.processes = processes;
+	}
+
+	public void run() {
+		int downT = 0;
+		 sort();
+		
+		for (int i = 0; i < processes.size(); i++) {
+			if (completedT < processes.get(i).getArrivalTime()) {
+				downT = processes.get(i).getArrivalTime() - completedT;
+				processes.get(i).setWaitingTime(0);
+				
+				completedT += downT;
+				completedT += processes.get(i).getBurstTime();
+				processes.get(i).setCompletedTime(completedT);
+				processes.get(i).setTurnaroundTime(processes.get(i).getCompletedTime()-processes.get(i).getArrivalTime());
+				
+			}
+			else {
+				completedT += processes.get(i).getBurstTime();
+				processes.get(i).setCompletedTime(completedT);
+				processes.get(i).setTurnaroundTime(processes.get(i).getCompletedTime()-processes.get(i).getArrivalTime());
+				processes.get(i).setWaitingTime(processes.get(i).getTurnaroundTime() - processes.get(i).getBurstTime());
+			
+			
+			}
+		}
+		printTable();
+		printGanttChart();
+		
+	}
+
+	public void printTable() {
+		System.out.println("------------------------------------------");
+		System.out.println("PID\tAT\tBT\tCT\tTAT\tWT");
+		for (int i = 0; i < processes.size(); i++) {
+			System.out.print(processes.get(i).getProcessId() + "\t" );
+			System.out.print(processes.get(i).getArrivalTime() + "\t" );
+			System.out.print(processes.get(i).getBurstTime() + "\t" );
+			System.out.print(processes.get(i).getCompletedTime() + "\t" );
+			System.out.print(processes.get(i).getTurnaroundTime() + "\t" );
+			System.out.println(processes.get(i).getWaitingTime() );
+		}
+		System.out.println("------------------------------------------");
+	}
+
+	public void printGanttChart() {
+		System.out.print("\n");
+		for (int i = 0; i < processes.size(); i++) {
+			for (int j = 0; j < processes.get(i).getBurstTime()*2 +4 ; j++) {
+				if (i != 0) {
+					if (processes.get(i-1).getCompletedTime() < processes.get(j).getArrivalTime()) {
+						for (int j2 = 0; j2 < (processes.get(i-1).getCompletedTime() - processes.get(i).getArrivalTime())+2; j2++) {
+							System.out.print("=");
+						}
+					}
+				}
+				System.out.print("=");
+			}
+		}
+		
+		System.out.print("\n");
+	}
+	
+	
+	private void sort() {
+		Process temp;
+		// for-each in the array. It compares from i to zero if j is smaller than the one before is which places with them.  
+		for (int i = 0; i < processes.size(); i++) {
+			for (int j = i; j > 0 ; j--) {
+				if (processes.get(j).getArrivalTime() < processes.get(j-1).getArrivalTime() ) {
+					temp = processes.get(j);
+					processes.set(j,processes.get(j-1));
+					processes.set(j-1, temp);
+				}
+			}
+		}
+		
+	}
+}

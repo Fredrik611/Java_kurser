@@ -1,0 +1,70 @@
+/*
+ * File:	Process.java
+ * Course: 	Operating Systems
+ * Code: 	1DV512
+ * Author: 	Suejb Memeti
+ * Date: 	November, 2018
+ */
+
+import java.util.ArrayList;
+
+public class FCFS{
+
+	// The list of processes to be scheduled
+	public ArrayList<Process> processes;
+
+	// Class constructor
+	public FCFS(ArrayList<Process> processes) {
+		this.processes = processes;
+	}
+
+	public void run() {
+		int completedT = 0;
+		 sort();
+		
+		for (int i = 0; i < processes.size(); i++) {
+			
+			completedT += processes.get(i).getBurstTime();
+			processes.get(i).setCompletedTime(completedT);
+			processes.get(i).setTurnaroundTime(processes.get(i).getCompletedTime()-processes.get(i).getArrivalTime());
+			processes.get(i).setWaitingTime(processes.get(i).getTurnaroundTime() - processes.get(i).getBurstTime());
+			
+		}
+		printTable();
+		
+	}
+
+	public void printTable() {
+		System.out.println("------------------------------------------");
+		System.out.println("PID\tAT\tBT\tCT\tTAT\tWT");
+		for (int i = 0; i < processes.size(); i++) {
+			System.out.print(processes.get(i).getProcessId() + "\t" );
+			System.out.print(processes.get(i).getArrivalTime() + "\t" );
+			System.out.print(processes.get(i).getBurstTime() + "\t" );
+			System.out.print(processes.get(i).getCompletedTime() + "\t" );
+			System.out.print(processes.get(i).getTurnaroundTime() + "\t" );
+			System.out.println(processes.get(i).getWaitingTime() );
+		}
+		System.out.println("------------------------------------------");
+	}
+
+	public void printGanttChart() {
+		// TODO Print the demonstration of the scheduling algorithm using Gantt Chart
+
+	}
+	
+	
+	private void sort() {
+		for (int i = 1; i < processes.size(); i++) { 
+            Process key = processes.get(i); 
+            int j = i - 1; 
+  
+            while (j >= 0 && processes.get(j).getArrivalTime()> key.getArrivalTime()) { 
+                processes.set(j, processes.get(j+1));
+                j = j - 1; 
+            } 
+           
+            processes.set(j+1, key); 
+        } 
+	}
+}

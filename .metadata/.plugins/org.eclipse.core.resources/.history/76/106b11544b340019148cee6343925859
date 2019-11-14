@@ -1,0 +1,18 @@
+package fa222rw_assign3;
+
+public class EuclideanMain {
+	public static void main(String[] args) {
+		
+	}
+	private static int GCD(int m, int n) {
+		int commonDivider = 0;
+		if (m != 0 && n != 0) {
+			while(m % commonDivider != 0 && n % commonDivider != 0) {
+			
+			}
+		return -1;
+		}
+		else
+			throw new IllegalArgumentException("One of the arguments is 0");
+	}
+}

@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package fa222rw_assign3;
+
+/**
+ * @author Fredrik
+ *
+ */
+public class TinyPainter extends Application{
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+	}
+
+}

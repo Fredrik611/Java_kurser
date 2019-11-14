@@ -1,0 +1,139 @@
+package fa222rw_assign2.ArrayQueue;
+
+import java.util.Iterator;
+
+
+public class ArrayQueue implements Queue {
+	private int size = 0;
+	private Object[] arr = new Object[8];
+	private int first = 0;
+	private int last = 0;
+	
+	// returns the size of the array 
+	@Override
+	public int size() {return size;}
+
+	// returns if the array is empty
+	@Override
+	public boolean isEmpty() {return size == 0;}
+
+	// adds an object to the array 
+	@Override
+	public void enqueue(Object element) {
+		size++;
+		// if the size is large enough 
+		if (size+1 >= arr.length) {
+			resize();
+		}
+		
+		if (last >= first ) {
+			arr[last++] = element; 
+		}
+		
+		else {
+			// if the array has wrapped around it should move the first part of the array forward one step
+			moveFirst();
+			arr[++last] = element;
+		}
+	}
+	
+	private void resize() {
+		// resizes the array
+		int cnt = 0;
+		Object[] tmp = new Object[2*arr.length];
+		// if the order is right then it copies the array to the larger one 
+		if (first == 0) {
+			
+			System.arraycopy(arr,0,tmp,0,arr.length); 
+		}
+		
+		// otherwise it should reorder it self in the new array. so first is first and last is last 
+		else {
+			for (int i = first; i < size-1; i++) {
+				tmp[cnt++] = arr[i];
+			}
+			for (int i = 0; i <= last ;i++) {
+				tmp[cnt++] = arr[i];
+			}
+			first = 0;
+			last = size-1;
+		}
+		arr = tmp;
+	}
+	private void moveFirst() {
+		for (int i = size-1; i >= first; i--) {
+			arr[i+1] = arr[i];
+		}
+		first++;
+	}
+	private void moveLast() {
+		for (int i = last; i >= 0; i--) {
+			arr[i+1] = arr[i]; 
+			
+		}
+		last++;
+	}
+
+	@Override
+	public Object dequeue() throws IndexOutOfBoundsException {
+		if (size >= 0) {
+		Object tmp = arr[first];
+		if (	first != size-1) {
+			first++;
+			
+			if (last != size)
+				moveLast();
+			else	 
+			last = 0;
+			arr[0] = arr[--size];
+		}
+		else {
+			first = 0;
+			last++;
+			size--;
+		}
+			
+		return tmp;
+		}
+		else
+			throw new IndexOutOfBoundsException();
+	}
+
+	@Override
+	public Object first() throws IndexOutOfBoundsException{
+		if (size > 0) 
+		return arr[first];
+		else
+			throw new IndexOutOfBoundsException();
+	}
+
+	@Override
+	public Object last() {		
+		if (size >= 0) 
+			return arr[last-1];
+		else
+			throw new IndexOutOfBoundsException();}
+
+	
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		
+		for (int i = 0; i < size-1; i++) {
+			str.append(arr[i] + ", ");
+		}
+		return str.toString();
+	}
+
+	@Override
+	public Iterator<Object> iterator(){return new arrIterator();}
+	private class arrIterator implements Iterator<Object> {
+		private int count = 0;
+		public Object next() {return arr[count++];}
+		
+		public boolean hasNext() {return count<size;}
+		
+		public void remove() {
+			throw new RuntimeException("remove() is not implemented");
+		}
+	}
+}
