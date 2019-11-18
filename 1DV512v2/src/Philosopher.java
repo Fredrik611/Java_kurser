@@ -156,9 +156,10 @@ public class Philosopher implements Runnable {
 						System.out.print("");
 						if (rightChopstick.getLock().tryLock()) {
 							eat();
-							System.out.print("P" + id + " is now eating");
+							System.out.println("P" + id + " is now eating");
 							eat = true;
 							rightChopstick.getLock().unlock();
+							leftChopstick.getLock().unlock();
 							
 						}
 						else {
