@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.knowm.xchart.style.markers.Square"/>
-    <fullyQualifiedTypeName name="javafx.scene.layout.GridPane"/>
     <fullyQualifiedTypeName name="javafx.geometry.Insets"/>
     <fullyQualifiedTypeName name="javafx.scene.control.TextField"/>
     <fullyQualifiedTypeName name="javafx.scene.control.Alert"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="org.junit.Test"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="Chopstick"/>
+    <fullyQualifiedTypeName name="Philosopher"/>
 </qualifiedTypeNameHistroy>

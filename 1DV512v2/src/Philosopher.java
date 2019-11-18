@@ -33,6 +33,11 @@ public class Philosopher implements Runnable {
 	private double eatingTime = 0;
 	private double hungryTime = 0;
 	
+	private long milistart = 0;
+	private long miliend = 0;
+	
+	private boolean eat = false;
+	
 	public Philosopher(int id, Chopstick leftChopstick, Chopstick rightChopstick, int seed, boolean debug) {
 		this.id = id;
 		this.leftChopstick = leftChopstick;
@@ -139,6 +144,52 @@ public class Philosopher implements Runnable {
 		 * You should start with a straightforward implementation, but you will eventually have to make it more sophisticated
 		 * w.r.t the order (and conditions) of the actions and the threads synchronization in order to pass the tests with the expected results!
 		 */
+		try {
+			while (!DiningPhilosopher.exit) {
+							
+				thinking();
+				System.out.println("P" + id + " has now done thinking for " + miliend + " seconds");
+				while (!eat) {
+					hungry();
+					System.out.println("P" + id + " is now hungry");
+					if (leftChopstick.getLock().tryLock()) {
+						System.out.print("");
+						if (rightChopstick.getLock().tryLock()) {
+							eat();
+							System.out.print("P" + id + " is now eating");
+							eat = true;
+							rightChopstick.getLock().unlock();
+							
+						}
+						else {
+							leftChopstick.getLock().unlock();
+						}
+					}
+				
+				}
+				eat = false;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
+		
+	}
+	private void thinking() throws Exception {
+		numberOfThinkingTurns++;
+		milistart = System.currentTimeMillis();
+		miliend = randomGenerator.nextInt(1000);
+		thinkingTime += miliend;
+		Thread.sleep(miliend);
+		
+	}
+	private void hungry() {
+		numberOfHungryTurns++;
+	}
+	private void eat() throws Exception{
+		numberOfEatingTurns++;
+		miliend = randomGenerator.nextInt(1000);
+		eatingTime += miliend;
+		Thread.sleep(miliend);
 	}
 }

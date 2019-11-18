@@ -26,6 +26,7 @@ public class DiningPhilosopher {
 	private final int NUMBER_OF_PHILOSOPHERS = 5;
 	private int SIMULATION_TIME = 10000;
 	private int SEED = 0;
+	public static boolean exit = false;
 
 	ExecutorService executorService = null;
 	ArrayList<Philosopher> philosophers = null;
@@ -48,20 +49,20 @@ public class DiningPhilosopher {
 				executorService.execute(philosophers.get(i));
 				Thread.sleep(50); //makes sure that this thread kicks in before the next one
 			}
-
+			long timeStart = System.currentTimeMillis();
 			// Main thread sleeps till time of simulation
 			Thread.sleep(SIMULATION_TIME);
+			
 
 			if (DEBUG) {
 				System.out.println("\n>>> Asking all philosophers to stop\n");
 			}
 			
-			/*	TODO
-			 *  Stop all philosophers.
-			 *  Make sure all of the philosopher threads actually terminate!!!  
-			 *  
-			 *  Add comprehensive comments to explain your implementation.
-			 */
+			while (SIMULATION_TIME < System.currentTimeMillis() - timeStart) {
+			
+			}
+			exit = true;
+		
 
 		} finally {
 			executorService.shutdown();
@@ -79,13 +80,14 @@ public class DiningPhilosopher {
 		//create the executor service
 		executorService = Executors.newFixedThreadPool(NUMBER_OF_PHILOSOPHERS);
 
-		/* TODO
-		 * Add chopsticks,
-		 * Add philosophers, and
-		 * Assign the corresponding chopsticks.
-		 * Add comprehensive comments to explain your implementation.
-		 */
-
+		for (int i = 0; i < 5; i++) {
+		chopsticks.add(new Chopstick(i));
+		}
+		for (int i = 0; i < NUMBER_OF_PHILOSOPHERS; i++) {
+			philosophers.add(new Philosopher(i, chopsticks.get((i+1)%5 ), chopsticks.get(i % 5), SEED, DEBUG));
+		}
+		
+		
 	}
 
 	public ArrayList<Philosopher> getPhilosophers() {
