@@ -154,11 +154,12 @@ public class DiningPhilosopherTest {
 	}
 
 	@Test(timeout = 10000+2000)
+	@RepeatedTest(10)
 	public void test3() throws InterruptedException {
 		DiningPhilosopher dp = new DiningPhilosopher(); // create an instance to DiningPhilosopher class
 		int simTime = 10000;
 		int seed = 100;
-		dp.DEBUG = false;
+		dp.DEBUG = true;
 
 		dp.initialize(simTime, seed); // initialize the required objects
 

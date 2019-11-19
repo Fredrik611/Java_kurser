@@ -36,6 +36,7 @@ public class DiningPhilosopher {
 
 	public void start() throws InterruptedException {
 		try {
+			exit = false;
 			/*
 			 * First we start two non-adjacent threads, which are T1 and T3
 			 */
@@ -59,12 +60,11 @@ public class DiningPhilosopher {
 				System.out.println("\n>>> Asking all philosophers to stop\n");
 			}
 			
-			
+			exit = true;
 
 		} finally {
 			executorService.shutdown();
 			executorService.awaitTermination(10, TimeUnit.MILLISECONDS);
-			
 		}
 	}
 

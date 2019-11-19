@@ -142,7 +142,7 @@ public class Philosopher implements Runnable {
 				System.out.println("P" + id + " has now done thinking for " + miliend + " seconds");
 				}
 				hungry();
-				while (!eat) {
+				while (!eat && !Thread.currentThread().isInterrupted()) {
 					
 					if (leftChopstick.getLock().tryLock()) {
 						System.out.print("");
@@ -152,6 +152,7 @@ public class Philosopher implements Runnable {
 							if (DEBUG) {
 							System.out.println("P" + id + " has now been EATING!! for " + miliend +" time units");
 							}
+							
 							eat = true;
 							
 							rightChopstick.getLock().unlock();
@@ -189,6 +190,7 @@ public class Philosopher implements Runnable {
 	}
 	private void hungry() {
 		numberOfHungryTurns++;
+		
 	}
 	private void eat() throws Exception{
 		numberOfEatingTurns++;
