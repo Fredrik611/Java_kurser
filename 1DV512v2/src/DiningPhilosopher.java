@@ -12,6 +12,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.jupiter.api.RepeatedTest;
+
 
 public class DiningPhilosopher {
 
@@ -49,24 +51,20 @@ public class DiningPhilosopher {
 				executorService.execute(philosophers.get(i));
 				Thread.sleep(50); //makes sure that this thread kicks in before the next one
 			}
-			long timeStart = System.currentTimeMillis();
 			// Main thread sleeps till time of simulation
 			Thread.sleep(SIMULATION_TIME);
 			
 
-			if (DEBUG) {
+			if (!DEBUG) {
 				System.out.println("\n>>> Asking all philosophers to stop\n");
 			}
 			
-			while (SIMULATION_TIME < System.currentTimeMillis() - timeStart) {
 			
-			}
-			exit = true;
-		
 
 		} finally {
 			executorService.shutdown();
 			executorService.awaitTermination(10, TimeUnit.MILLISECONDS);
+			
 		}
 	}
 

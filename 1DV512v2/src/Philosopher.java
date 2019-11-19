@@ -69,27 +69,17 @@ public class Philosopher implements Runnable {
 	}
 
 	public double getAverageThinkingTime() {
-		/* TODO
-		 * Return the average thinking time
-		 * Add comprehensive comments to explain your implementation
-		 */
-		return 0;
+		
+		return thinkingTime/numberOfThinkingTurns;
 	}
 
 	public double getAverageEatingTime() {
-		/* TODO
-		 * Return the average eating time
-		 * Add comprehensive comments to explain your implementation
-		 */
-		return 0;
+		return (double) eatingTime/numberOfEatingTurns;
 	}
 
 	public double getAverageHungryTime() {
-		/* TODO
-		 * Return the average hungry time
-		 * Add comprehensive comments to explain your implementation
-		 */
-		return 0;
+		
+		return hungryTime/numberOfHungryTurns;
 	}
 	
 	public int getNumberOfThinkingTurns() {
@@ -145,19 +135,25 @@ public class Philosopher implements Runnable {
 		 * w.r.t the order (and conditions) of the actions and the threads synchronization in order to pass the tests with the expected results!
 		 */
 		try {
-			while (!DiningPhilosopher.exit) {
+			while (!Thread.currentThread().isInterrupted()) {
 							
 				thinking();
+				if (DEBUG) {
 				System.out.println("P" + id + " has now done thinking for " + miliend + " seconds");
+				}
+				hungry();
 				while (!eat) {
-					hungry();
-					System.out.println("P" + id + " is now hungry");
+					
 					if (leftChopstick.getLock().tryLock()) {
 						System.out.print("");
 						if (rightChopstick.getLock().tryLock()) {
+							
 							eat();
-							System.out.println("P" + id + " is now eating");
+							if (DEBUG) {
+							System.out.println("P" + id + " has now been EATING!! for " + miliend +" time units");
+							}
 							eat = true;
+							
 							rightChopstick.getLock().unlock();
 							leftChopstick.getLock().unlock();
 							
@@ -169,9 +165,17 @@ public class Philosopher implements Runnable {
 				
 				}
 				eat = false;
+				
 			}
+			if (Thread.holdsLock(leftChopstick)) {
+				leftChopstick.getLock().unlock();
+			}
+			if (Thread.holdsLock(rightChopstick)) {
+				rightChopstick.getLock().unlock();
+			}
+			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 		
@@ -180,9 +184,8 @@ public class Philosopher implements Runnable {
 		numberOfThinkingTurns++;
 		milistart = System.currentTimeMillis();
 		miliend = randomGenerator.nextInt(1000);
-		thinkingTime += miliend;
 		Thread.sleep(miliend);
-		
+		thinkingTime += miliend;
 	}
 	private void hungry() {
 		numberOfHungryTurns++;
@@ -190,7 +193,10 @@ public class Philosopher implements Runnable {
 	private void eat() throws Exception{
 		numberOfEatingTurns++;
 		miliend = randomGenerator.nextInt(1000);
-		eatingTime += miliend;
+		milistart = System.currentTimeMillis();
 		Thread.sleep(miliend);
+		eatingTime += miliend;
+		
+		
 	}
 }
