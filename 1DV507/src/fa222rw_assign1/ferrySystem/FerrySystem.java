@@ -15,6 +15,7 @@ public class FerrySystem implements Ferry{
 	@Override
 	public int countPassengers() {
 		return passengerSpace;
+		
 	}
 
 	// counts all the vehicle space
